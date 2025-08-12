@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>Pizza Fly | Sign In or Register</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+  <div class="logo">Pizza Fly Pizzeria</div>
+  <nav aria-label="Main navigation" class="nav">
+    <ul class="nav-links">
+      <li><a href="./index.html#menu">Menu</a></li>
+      <li><a href="./index.html#features">Features</a></li>
+      <li><a href="./index.html#about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main style="padding-top:7rem;">
+  <section class="login-section">
+    <div class="login-box">
+      <h2 id="authTitle">Welcome back</h2>
+
+      <!-- Tabs -->
+      <div style="display:flex; gap:.5rem; justify-content:center; margin:.75rem 0 1rem;">
+        <button class="btn-primary" id="tabSignIn">Sign In</button>
+        <button class="btn-primary" id="tabRegister" style="background:#5a8d76;">Create Account</button>
+      </div>
+
+      <!-- Sign In -->
+      <form id="authSignInForm" style="display:block; text-align:left;">
+        <label>Email</label>
+        <input class="builder-input" id="signinEmail" required type="email"/>
+
+        <label>Password</label>
+        <input class="builder-input" id="signinPassword" required type="password"/>
+
+        <button class="btn-primary" style="width:100%; margin-top:.5rem;" type="submit">Sign In</button>
+      </form>
+
+      <!-- Register -->
+      <form id="authRegisterForm" style="display:none; text-align:left;">
+        <label>Full Name</label>
+        <input class="builder-input" id="regName" required type="text"/>
+
+        <label>Email</label>
+        <input class="builder-input" id="regEmail" required type="email"/>
+
+        <label>Password</label>
+        <input class="builder-input" id="regPassword" required type="password"/>
+
+        <button class="btn-primary" style="width:100%; margin-top:.5rem;" type="submit">Create Account</button>
+      </form>
+
+      <div style="margin-top:1rem;">
+        <button class="btn-primary" id="continueGuestBtn" style="background:#6e9783;">Continue as Guest</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Pizza Fly Pizzeria</p>
+</footer>
+
+<script src="pizzafly.js"></script>
+</body>
+</html>
