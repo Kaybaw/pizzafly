@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Fly Pizzeria | Artisan Pizza</title>
+
+  <!-- Force auth before showing the home page -->
+  <script>
+    (function () {
+      try {
+        const u = localStorage.getItem('pf_user');
+        if (!u) {
+          // send them to auth; after auth, we’ll return here
+          location.replace('./auth.html?next=index');
+        }
+      } catch (e) {
+        location.replace('./auth.html?next=index');
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons (for feature icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">Pizza Fly Pizzeria</div>
+  <div class="points-display">Points: <span id="rewardPointsDisplay">0</span></div>
+  <nav class="nav" aria-label="Main navigation">
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  <a href="./order.html" class="btn-primary" id="orderNowBtn" aria-label="Order Now">Order Now</a>
+  <button onclick="localStorage.removeItem('pf_user'); location.href='auth.html';" class="btn-primary" style="margin-left:0.5rem;">Logout</button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Artisan Pizzas Crafted with Passion</h1>
+    <p>Experience authentic Italian flavors with our wood-fired pizzas made from locally-sourced ingredients.</p>
+    <a href="#menu" id="exploreBtn" class="btn-primary">Explore Menu</a>
+  </div>
+  <div class="hero-image">
+    <img src="https://www.acouplecooks.com/wp-content/uploads/2019/01/Margherita-Pizza-017.jpg" alt="Artisan Pizzas" height="600" loading="lazy" />
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <h2 style="text-align:center;margin-bottom:1.25rem;">Menu</h2>
+
+  <!-- Filters -->
+  <div class="filter-buttons menu-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="pizza">Pizzas</button>
+    <button class="filter-btn" data-filter="pasta">Pastas</button>
+    <button class="filter-btn" data-filter="drinks">Drinks</button>
+  </div>
+
+  <!-- Menu items -->
+  <div class="menu-grid">
+    <!-- ===== Custom Pizza CARD (Pizza category) ===== -->
+    <div class="menu-card" data-category="pizza" id="builderCard">
+      <img
+        src="https://thestayathomechef.com/wp-content/uploads/2023/07/Easy-Cheese-Pizza-9.jpg"
+        alt="plain cheese pizza" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3 id="builderTitle">Custom Pizza — Medium (0 toppings)</h3>
+        <p id="builderDesc">Hand-Tossed • Tomato • Normal Cheese</p>
+        <p class="price" id="builderPrice">$12.99</p>
+
+        <div class="builder-buttons">
+          <a href="#builderModal" class="btn-primary">Customize</a>
+          <button id="builderAddFromCard" class="add-to-cart-btn btn-primary" style="display:none;">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classic Margherita -->
+    <div class="menu-card" data-category="pizza">
+      <img src="https://tse1.mm.bing.net/th/id/OIP._GfaUU_QVqZevVMgv322OwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Classic Margherita Pizza" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Classic Margherita</h3>
+        <p>San Marzano tomatoes, fresh mozzarella, basil</p>
+        <p class="price">$14.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Sweet Hawaiian -->
+    <div class="menu-card" data-category="pizza">
+      <img src="https://img.kidspot.com.au/pZnR2nZu/kk/2015/03/hawaiian-pizza-recipe-605894-2.jpg" alt="Sweet Hawaiian Pizza" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Sweet Hawaiian</h3>
+        <p>Shrimp, chicken, mushrooms, jalapeños, bell peppers, bacon, ham, pineapple</p>
+        <p class="price">$14.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Pepperoni -->
+    <div class="menu-card" data-category="pizza">
+      <img src="https://pizzamaruusa.com/wp-content/uploads/2016/01/Pepperoni-Pizza.jpg" alt="Pepperoni Pizza" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Pepperoni Pizza</h3>
+        <p>Pepperoni, tomato sauce, mozzarella</p>
+        <p class="price">$14.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Chicken Bacon Pasta -->
+    <div class="menu-card" data-category="pasta">
+      <img src="https://bing.com/th?id=OSK.59e2a4dce0d1ce7d30e8bf2c4afd4ec7" alt="Chicken Bacon Pasta" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Chicken Bacon Pasta</h3>
+        <p>Chicken, bacon, creamy Alfredo, spinach, mozzarella</p>
+        <p class="price">$16.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Creamy Shrimp Pasta -->
+    <div class="menu-card" data-category="pasta">
+      <img src="https://bing.com/th?id=OSK.63aa4cb572713f5cb314a6a7787485a9" alt="Creamy Shrimp Pasta" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Creamy Shrimp Pasta</h3>
+        <p>Shrimp, creamy Alfredo, basil</p>
+        <p class="price">$16.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Drinks -->
+    <div class="menu-card" data-category="drinks">
+      <img src="https://media.officedepot.com/images/f_auto,q_auto,e_sharpen,h_450/products/208206/208206_p/208206" alt="Coca-Cola" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Coke Cola</h3>
+        <p class="price">$2.00</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="menu-card" data-category="drinks">
+      <img src="https://lostanitos.com/cdn/shop/products/Sprite-12-Oz-Case-Of-24.png?v=1600995045" alt="Sprite" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Sprite</h3>
+        <p class="price">$2.00</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="menu-card" data-category="drinks">
+      <img src="https://www.bing.com/th?id=OPHS.Xx%2bS0JrDeESy8g474C474&o=5&pid=21.1&w=148&h=260&qlt=100&dpr=1.3&bw=6&bc=FFFFFF" alt="Fanta" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Fanta</h3>
+        <p class="price">$1.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="menu-card" data-category="drinks">
+      <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQefwFvvqZ0EuAIkAt6BxVBIqCQN85DnZsE6yAilEYgNij9M3aDvFuZtnoQS0tlHvSleipbZXctbXwCPmNEliTa-WCadNP_34YBKtQr9frboaNbQHXTXv86LsP1BuGI&usqp=CAc" alt="Pepsi" height="200" loading="lazy" />
+      <div class="menu-card-content">
+        <h3>Pepsi</h3>
+        <p class="price">$1.99</p>
+        <button class="add-to-cart-btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll-to-Top -->
+<button class="scroll-top btn-primary" aria-label="Scroll to top" style="display:none">top</button>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="feature-grid features-grid">
+    <div class="feature-card">
+      <i class="fas fa-pizza-slice"></i>
+      <h3>Wood-fired Oven</h3>
+      <p>Authentic 900°F brick oven cooking</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-seedling"></i>
+      <h3>Local Ingredients</h3>
+      <p>Sourced from local farms daily</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-clock"></i>
+      <h3>Fast Delivery</h3>
+      <p>30-minute guarantee or free</p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <h2>About Us</h2>
+  <p>Pizza Fly Pizzeria has been serving artisan pizzas since 2019. Our mission is to bring authentic Italian flavors to your doorstep using locally-sourced ingredients and traditional cooking methods.</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <h3>Pizza Fly Pizzeria</h3>
+      <p>Bringing authentic Italian flavors to your doorstep since 2019</p>
+    </div>
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p>123 Teams Street, MD</p>
+      <p>(555)-123-4567</p>
+      <p>info@pizzafly.com</p>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; 2025 Pizza Fly. All Rights Reserved.
+  </div>
+</footer>
+
+<!-- ===== Custom Pizza MODAL ===== -->
+<div id="builderModal" class="modal" aria-hidden="true">
+  <a href="#" class="modal-backdrop" aria-label="Close"></a>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="builderModalTitle">
+    <a href="#" class="modal-close" aria-label="Close">×</a>
+
+    <h3 id="builderModalTitle" style="margin-bottom:.75rem;">Customize Your Pizza</h3>
+
+    <label for="sizeSelect"><strong>Size</strong></label>
+    <select id="sizeSelect" class="builder-input">
+      <option value="Small" data-price="9.99">Small — $9.99</option>
+      <option value="Medium" data-price="12.99" selected>Medium — $12.99</option>
+      <option value="Large" data-price="14.99">Large — $14.99</option>
+      <option value="XL" data-price="17.99">XL — $17.99</option>
+    </select>
+
+    <label for="crustSelect"><strong>Crust</strong></label>
+    <select id="crustSelect" class="builder-input">
+      <option value="Thin" data-up="0">Thin (+$0.00)</option>
+      <option value="Hand-Tossed" data-up="1">Hand-Tossed (+$1.00)</option>
+      <option value="Stuffed Crust" data-up="3">Stuffed Crust (+$3.00)</option>
+      <option value="Gluten-Free" data-up="2">Gluten-Free (+$2.00)</option>
+    </select>
+
+    <label for="sauceSelect"><strong>Sauce</strong></label>
+    <select id="sauceSelect" class="builder-input">
+      <option value="Tomato" data-up="0">Tomato (standard)</option>
+      <option value="Spicy Red" data-up="0.5">Spicy Red (+$0.50)</option>
+      <option value="White Garlic" data-up="1">White Garlic (+$1.00)</option>
+    </select>
+
+    <label for="cheeseSelect"><strong>Cheese</strong></label>
+    <select id="cheeseSelect" class="builder-input">
+      <option value="Light" data-up="0">Light</option>
+      <option value="Normal" data-up="0" selected>Normal</option>
+      <option value="Extra" data-up="1.5">Extra (+$1.50)</option>
+    </select>
+
+    <div style="margin-top:.5rem;">
+      <strong>Toppings</strong> <small>(+$1.25 each)</small>
+      <div class="builder-toppings" style="margin-top:.5rem;">
+        <label><input type="checkbox" class="topCheck" value="Mushrooms" /> Mushrooms</label>
+        <label><input type="checkbox" class="topCheck" value="Onions" /> Onions</label>
+        <label><input type="checkbox" class="topCheck" value="Green Peppers" /> Green Peppers</label>
+        <label><input type="checkbox" class="topCheck" value="Black Olives" /> Black Olives</label>
+        <label><input type="checkbox" class="topCheck" value="Spinach" /> Spinach</label>
+        <label><input type="checkbox" class="topCheck" value="Jalapeños" /> Jalapeños</label>
+        <label><input type="checkbox" class="topCheck" value="Pepperoni" /> Pepperoni</label>
+        <label><input type="checkbox" class="topCheck" value="Sausage" /> Sausage</label>
+        <label><input type="checkbox" class="topCheck" value="Bacon" /> Bacon</label>
+        <label><input type="checkbox" class="topCheck" value="Chicken" /> Chicken</label>
+        <label><input type="checkbox" class="topCheck" value="Ham" /> Ham</label>
+      </div>
+    </div>
+
+    <div class="builder-summary" style="margin-top:1rem;">
+      <div style="font-weight:600;margin-bottom:.35rem;">Your Selection</div>
+      <div id="builderSummary" class="builder-summary-text">
+        Medium • Hand-Tossed • Tomato • Normal Cheese • 0 toppings
+      </div>
+    </div>
+
+    <div class="builder-modal-cta">
+      <a href="#" class="btn-primary" onclick="document.getElementById('builderAddFromCard').click(); return true;">
+        Add Custom Pizza
+      </a>
+      <div class="builder-modal-price">
+        <span>Price:</span> <strong id="builderPrice">$12.99</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main site JS -->
+<script src="pizzafly.js"></script>
+</body>
+</html>
